@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Student Dashboard with Profile Settings & Sidebar</title>
+<link rel="stylesheet" href="/css/dashboard.css" />
+<link rel="icon" type="image/png" href="../img/logo.JPG">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+  --card-bg: #fff;
+  --card-border: #ccc;
+  --primary-color: #1b3c2b;
+  --btn-color: #fff;
+}
+
+  /* Profile Settings Card */
+  .profile-card {
+    max-width: 400px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    
+  }
+
+  .profile-card h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Profile Picture Upload */
+  .profile-pic-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile-pic-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .upload-btn {
+    background-color: var(--primary-color);
+    color: var(--btn-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .upload-btn:hover,
+  .upload-btn:focus {
+    background-color: #15501c;
+  }
+
+  /* Password visibility toggle */
+  .password-wrapper {
+    position: relative;
+  }
+  .password-wrapper input {
+    padding-right: 2.5rem;
+  }
+  .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 0.6rem;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+  }
+
+  /* Submit button */
+  button[type="submit"] {
+    background-color: var(--primary-color);
+    color: var(--btn-color);
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease;
+  }
+  button[type="submit"]:hover,
+  button[type="submit"]:focus {
+    background-color: #15501c;
+  }
+</style>
+</head>
+<body>
+
+<!-- Toggle button for mobile -->
+<button class="toggle-btn" aria-label="Toggle navigation sidebar" aria-expanded="false" aria-controls="sidebarNav">&#9776;</button>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebarNav" role="navigation" aria-label="Sidebar Navigation">
+  <div class="brand" aria-label="User Dashboard">...</div>
+  <nav>
+    <ul>
+      <li><a href="/Dashboard/dashboard.html" id="nav-home" class="active" aria-current="page" tabindex="0">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="blue" aria-hidden="true" focusable="false">
+            <path d="M3 12l9-9 9 9h-3v9h-12v-9h-3z" />
+          </svg>
+        Home</a></li>
+      <li><a href="/Dashboard/profile.html" id="nav-profile" tabindex="0">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" />
+          <path d="M6 20c0-3.31 2.69-6 6-6s6 2.69 6 6" />
+        </svg>
+        Profile</a></li>
+      <li><a href="/Dashboard/userbook.html" id="nav-books" tabindex="0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16">
+            <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+          </svg>
+        Books</a></li>
+      <li><a href="/Dashboard/audio.html" id="nav-audios" tabindex="0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-music-fill" viewBox="0 0 16 16">
+            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M11 6.64v1.75l-2 .5v3.61c0 .495-.301.883-.662 1.123C7.974 13.866 7.499 14 7 14s-.974-.134-1.338-.377C5.302 13.383 5 12.995 5 12.5s.301-.883.662-1.123C6.026 11.134 6.501 11 7 11c.356 0 .7.068 1 .196V6.89a1 1 0 0 1 .757-.97l1-.25A1 1 0 0 1 11 6.64"/>
+          </svg>
+        Audios</a></li>
+        <li>
+          <a href="/Dashboard/vidoe.html" id="nav-video" tabindex="0" aria-label="Video">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M6 5v6l5-3-5-3z"/>
+              <rect width="14" height="12" x="1" y="2" rx="2" ry="2" stroke="currentColor" fill="none" stroke-width="1"/>
+            </svg>
+            Video
+          </a>
+        </li>        
+        <li>
+          <a href="#" id="nav-logout" tabindex="0" aria-label="Logout" onclick="logoutAndRedirect(event)">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="24" height="24" fill="currentColor">
+              <path d="M16 13v-2H7V8l-5 4 5 4v-3zM19 3h-8a2 2 0 0 0-2 2v4h2V5h8v14h-8v-4h-2v4a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/>
+            </svg>
+            Logout
+          </a>
+        </li>                        
+        
+    </ul>
+  </nav>
+</div>
+
+<!-- Main content with profile settings -->
+<main>
+  <section class="profile-card" aria-label="Student Profile Settings">
+    <h2>Student Profile Settings</h2>
+    <form id="profileForm">
+      <!-- Profile Picture Upload -->
+      <div class="profile-pic-wrapper">
+        <img src="https://via.placeholder.com/120" alt="Profile Picture Preview" id="profilePicPreview" class="profile-pic-preview" />
+        <input type="file" id="profilePic" accept="image/*" style="display:none" />
+        <button type="button" class="upload-btn" id="uploadBtn">Upload Photo</button>
+      </div>
+
+      <!-- Name -->
+      <label for="nameInput">Full Name</label>
+      <input type="text" id="name" name="name" required placeholder="Enter your full name" />
+      <!-- Email -->
+      <label for="emailInput">Email</label>
+      <input type="email" id="emailInput" name="email" required placeholder="Enter your email" />
+
+      <!-- Password with visibility toggle -->
+      <label for="passwordInput">Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="passwordInput" name="password" required placeholder="type your password "/>
+        <button type="button" class="toggle-password" aria-label="Toggle password visibility" aria-pressed="false">&#128065;</button>
+      </div>
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div>
+     <p style="margin: 0; font-size: 14px; color: white;">
+       ©2025 Deecipher Tech, Made by 
+       <a href="https://wa.me/2348069715695" style="color: yellow; text-decoration: none;" target="_blank">
+         Bilmid Tech Creative
+       </a>
+     </p>
+   </div>
+</footer>
+
+<script>
+  // Sidebar toggle
+  const toggleBtn = document.querySelector('.toggle-btn');
+  const sidebar = document.getElementById('sidebarNav');
+
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = sidebar.classList.toggle('open');
+    toggleBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  document.addEventListener('click', (e) => {
+    if(window.innerWidth <= 768){
+      if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target) && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+
+  // Profile picture upload preview
+  const uploadBtn = document.getElementById('uploadBtn');
+  const profilePicInput = document.getElementById('profilePic');
+  const profilePicPreview = document.getElementById('profilePicPreview');
+
+  uploadBtn.addEventListener('click', () => profilePicInput.click());
+
+  profilePicInput.addEventListener('change', () => {
+    const file = profilePicInput.files[0];
+    if(file){
+      const reader = new FileReader();
+      reader.onload = e => {
+        profilePicPreview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  
+  // Password toggle visibility
+  const passwordInput = document.getElementById('passwordInput');
+  const togglePasswordBtn = document.querySelector('.toggle-password');
+
+  togglePasswordBtn.addEventListener('click', () => {
+    const isVisible = passwordInput.type === 'text';
+    passwordInput.type = isVisible ? 'password' : 'text';
+    togglePasswordBtn.setAttribute('aria-pressed', String(!isVisible));
+    togglePasswordBtn.innerHTML = isVisible ? '&#128065;' : '&#128064;'; // eye icons
+  });
+
+  // Handle form submit (demo)
+  const profileForm = document.getElementById('profileForm');
+  profileForm.addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Profile changes saved!');
+  });
+</script>
+
+</script>
+<script>
+  function logoutAndRedirect(event) {
+    event.preventDefault();
+    // Clear localStorage and sessionStorage to "log out"
+    localStorage.clear();
+    sessionStorage.clear();
+    // Redirect to your index page (change the URL if needed)
+    window.location.href = "/index.html";
+  }
+</script>
+
+
+</body>
+</html>

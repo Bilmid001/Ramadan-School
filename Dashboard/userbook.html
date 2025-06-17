@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ramadan School Book</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="icon" type="image/png" href="../img/logo.JPG">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #1b3c2b;
+    }
+
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .book-title {
+      font-weight: bold;
+      font-size: 1.3rem;
+      margin-bottom: 0.25rem;
+      color: #1b3c2b;
+    }
+
+    .book-author {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .book-description {
+      flex-grow: 1;
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+      color: #1b3c2b;
+      line-height: 1.4;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 0.5rem 0;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-view {
+      background-color: #1b3c2b;
+    }
+    .btn-view:hover {
+      background-color: #1e874b;
+    }
+
+    .btn-download {
+      background-color: #927714;
+    }
+    .btn-download:hover {
+      background-color: #f0d674;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        margin: 1rem;
+      }
+      .cards-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Toggle button for mobile -->
+<button class="toggle-btn" aria-label="Toggle navigation sidebar" aria-expanded="false" aria-controls="sidebarNav">&#9776;</button>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebarNav" role="navigation" aria-label="Sidebar Navigation">
+  <div class="brand" aria-label="User Dashboard">...</div>
+  <nav>
+    <ul>
+      <li><a href="/Dashboard/dashboard.html" id="nav-home" class="active" aria-current="page" tabindex="0">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="blue" aria-hidden="true" focusable="false">
+            <path d="M3 12l9-9 9 9h-3v9h-12v-9h-3z" />
+          </svg>
+        Home</a></li>
+      <li><a href="/Dashboard/profile.html" id="nav-profile" tabindex="0">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" />
+          <path d="M6 20c0-3.31 2.69-6 6-6s6 2.69 6 6" />
+        </svg>
+        Profile</a></li>
+      <li><a href="/Dashboard/userbook.html" id="nav-books" tabindex="0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16">
+            <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+          </svg>
+        Books</a></li>
+      <li><a href="/Dashboard/audio.html" id="nav-audios" tabindex="0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-music-fill" viewBox="0 0 16 16">
+            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M11 6.64v1.75l-2 .5v3.61c0 .495-.301.883-.662 1.123C7.974 13.866 7.499 14 7 14s-.974-.134-1.338-.377C5.302 13.383 5 12.995 5 12.5s.301-.883.662-1.123C6.026 11.134 6.501 11 7 11c.356 0 .7.068 1 .196V6.89a1 1 0 0 1 .757-.97l1-.25A1 1 0 0 1 11 6.64"/>
+          </svg>
+        Audios</a></li>
+        <li>
+          <a href="/Dashboard/vidoe.html" id="nav-video" tabindex="0" aria-label="Video">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M6 5v6l5-3-5-3z"/>
+              <rect width="14" height="12" x="1" y="2" rx="2" ry="2" stroke="currentColor" fill="none" stroke-width="1"/>
+            </svg>
+            Video
+          </a>
+        </li>        
+        <li>
+          <a href="#" id="nav-logout" tabindex="0" aria-label="Logout" onclick="logoutAndRedirect(event)">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="24" height="24" fill="currentColor">
+              <path d="M16 13v-2H7V8l-5 4 5 4v-3zM19 3h-8a2 2 0 0 0-2 2v4h2V5h8v14h-8v-4h-2v4a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/>
+            </svg>
+            Logout
+          </a>
+        </li>                        
+        
+    </ul>
+  </nav>
+</div>
+
+  <h1>Books (Kitabs) to Downloads</h1>
+
+  <section class="cards-container" aria-label="Books available for download and viewing">
+
+    <!-- Card 1 -->
+    <article class="card" role="article">
+      <h2 class="book-title">Book 1: Bulughul Maram</h2>
+      <p class="book-author">By Ibn Hajar Al-Asqalaniy</p>
+      <p class="book-description">Bulugh al-Maram by Ibn Hajar Al-Asqalani is a fundamental hadith collection focusing on key texts used in Islamic jurisprudence, bridging classical knowledge with practical guidance for students and scholars alike.</p>
+      <div class="buttons">
+        <a href="https://ia800603.us.archive.org/30/items/BulughAlMaramIbnHajarAlAsqalani/Bulugh%20Al-Maram%20-%20Ibn%20Hajar%20Al-Asqalani.pdf" target="_blank" rel="noopener" class="btn btn-view" role="button" aria-label="View Bulughul Maram PDF">View PDF</a>
+        <a href="https://ia800603.us.archive.org/30/items/BulughAlMaramIbnHajarAlAsqalani/Bulugh%20Al-Maram%20-%20Ibn%20Hajar%20Al-Asqalani.pdf" download class="btn btn-download" role="button" aria-label="Download Bulughul Maram PDF">Download PDF</a>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="card" role="article">
+      <h2 class="book-title">Book 2: Qur'an Tafseer</h2>
+      <p class="book-author">By Abdulrahman As'sadiy</p>
+      <p class="book-description">This offers comprehensive and easy-to-understand explanations of the meanings and context of Qur'anic verses, making it an invaluable resource for students and anyone seeking deeper insight into the Quran.</p>
+      <div class="buttons">
+        <a href="https://archive.org/details/quran-tafseer-as-sadi-vol-01-abdur-rahman-nasir-as-sadi/Quran%20Tafseer-As-Sadi-Vol%2002%20Abdur-Rahman%20Nasir%20as-Sadi/" target="_blank" rel="noopener" class="btn btn-view" role="button" aria-label="View Qur'an Tafseer PDF">View PDF</a>
+        <a href="https://archive.org/details/quran-tafseer-as-sadi-vol-01-abdur-rahman-nasir-as-sadi/Quran%20Tafseer-As-Sadi-Vol%2002%20Abdur-Rahman%20Nasir%20as-Sadi/" download class="btn btn-download" role="button" aria-label="Download Qur'an Tafseer PDF">Download PDF</a>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="card" role="article">
+      <h2 class="book-title">Book 3: Minhaj Firqatun Najiya</h2>
+      <p class="book-author">Muhammad Bn Jamil Zainuu</p>
+      <p class="book-description">Minhaj Firqatun Najiya provides clear guidance on Islamic beliefs and practices, focusing on the path of the saved sect and helping readers understand core aspects of faith and worship.</p>
+      <div class="buttons">
+        <a href="https://dn790008.ca.archive.org/0/items/Buku_Bacaan_Waktu_Santai/al-firqatun-najiyyah.pdf" target="_blank" rel="noopener" class="btn btn-view" role="button" aria-label="View Minhaj Firqatun Najiya PDF">View PDF</a>
+        <a href="https://dn790008.ca.archive.org/0/items/Buku_Bacaan_Waktu_Santai/al-firqatun-najiyyah.pdf" download class="btn btn-download" role="button" aria-label="Download Minhaj Firqatun Najiya PDF">Download PDF</a>
+      </div>
+    </article>
+
+    <!-- Card 4 -->
+    <article class="card" role="article">
+      <h2 class="book-title">Book 4: Tuhfatus-Saniyya</h2>
+      <p class="book-author">Muhammad Muhyideen A.</p>
+      <p class="book-description">Tuhfatus-Saniyya is a renowned classical text offering deep insights into Islamic creed and theology, widely studied for its clear explanations and authentic teachings.</p>
+      <div class="buttons">
+        <a href="https://archive.org/details/a-commentary-on-al-ajrumiyyah_202108" target="_blank" rel="noopener" class="btn btn-view" role="button" aria-label="View Tuhfatus-Saniyya PDF">View PDF</a>
+        <a href="https://archive.org/details/a-commentary-on-al-ajrumiyyah_202108" download class="btn btn-download" role="button" aria-label="Download Tuhfatus-Saniyya PDF">Download PDF</a>
+      </div>
+    </article>
+
+    <!-- Card 5 -->
+    <article class="card" role="article">
+      <h2 class="book-title">Book 5: Musdalahul Hadith</h2>
+      <p class="book-author">Muh'd Saleh Al-Uthaimin</p>
+      <p class="book-description">Musdalahul Hadith is an important work focusing on the principles and methodology of Hadith sciences, helping students understand how to verify and interpret prophetic traditions accurately.</p>
+      <div class="buttons">
+        <a href="https://archive.org/details/taiseer-e-mustalah-ul-hadith" target="_blank" rel="noopener" class="btn btn-view" role="button" aria-label="View Musdalahul Hadith PDF">View PDF</a>
+        <a href="https://archive.org/details/taiseer-e-mustalah-ul-hadith" download class="btn btn-download" role="button" aria-label="Download Musdalahul Hadith PDF">Download PDF</a>
+      </div>
+    </article>
+
+    <!-- Card 6 -->
+    <article class="card" role="article">
+      <h2 class="book-title">Book 6: Qur'an Recitation</h2>
+      <p class="book-author">Ramadan Tafseer</p>
+      <p class="book-description">Qur'an Recitation (Tajweed) focuses on the proper pronunciation, rules, and beautification of reading the Qur'an, ensuring the words are recited accurately and respectfully.</p>
+      <div class="buttons">
+        <a href="https://files.alislam.cloud/pdf/Holy-Quran-English.pdf" target="_blank" rel="noopener" class="btn btn-view" role="button" aria-label="View Qur'an Recitation PDF">View PDF</a>
+        <a href="https://files.alislam.cloud/pdf/Holy-Quran-English.pdf" download class="btn btn-download" role="button" aria-label="Download Qur'an Recitation PDF">Download PDF</a>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+       <p style="margin: 0; font-size: 14px; color: white;">
+         ©2025 Deecipher Tech, Made by 
+         <a href="https://wa.me/2348069715695" style="color: yellow; text-decoration: none;" target="_blank">
+           Bilmid Tech Creative
+         </a>
+       </p>
+     </div>
+ </footer>
+
+  <script>
+      // Sidebar toggle
+  const toggleBtn = document.querySelector('.toggle-btn');
+  const sidebar = document.getElementById('sidebarNav');
+
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = sidebar.classList.toggle('open');
+    toggleBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  document.addEventListener('click', (e) => {
+    if(window.innerWidth <= 768){
+      if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target) && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+  </script>
+
+</script>
+<script>
+  function logoutAndRedirect(event) {
+    event.preventDefault();
+    // Clear localStorage and sessionStorage to "log out"
+    localStorage.clear();
+    sessionStorage.clear();
+    // Redirect to your index page (change the URL if needed)
+    window.location.href = "/index.html";
+  }
+</script>
+
+</body>
+</html>

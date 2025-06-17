@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ramadan School Login</title>
+  <link rel="icon" type="image/png" href="../img/logo.JPG">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Container card with 3px solid border */
+    .card {
+      background: #f9f9f9;
+      width: 100%;
+      max-width: 400px;
+      padding: 30px 40px 40px;
+      border-radius: 12px;
+      border: 3px solid #1b3c2b;
+      box-shadow: 0 12px 24px rgba(27,60,43,0.25);
+      position: relative;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      text-align: center;
+      color: #1b3c2b;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 28px;
+      user-select: none;
+    }
+
+    form {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* Input group with icon */
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    /* Icon */
+    .input-group svg {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      fill: #1b3c2b;
+      width: 20px;
+      height: 20px;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 40px 12px 40px; /* extra padding right for eye icon */
+      border-radius: 6px;
+      border: 2px solid #1b3c2b;
+      font-size: 16px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      background: #f9f9f9;
+      color: #1b3c2b;
+      outline-offset: 2px;
+      outline-color: transparent;
+    }
+
+    input::placeholder {
+      color: #666;
+    }
+
+    input:focus {
+      border-color: #333;
+      box-shadow: 0 0 8px #1b3c2b;
+      outline-color: #1b3c2b;
+      background: #fff;
+    }
+
+    /* Password toggle icon */
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      width: 24px;
+      height: 24px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      fill: #1b3c2b;
+      opacity: 0.7;
+      user-select: none;
+      transition: opacity 0.3s ease;
+    }
+    .toggle-password:hover {
+      opacity: 1;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #1b3c2b;
+      color: #f9f9f9;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      box-shadow: 0 4px 8px rgba(27,60,43,0.3);
+    }
+
+    button:hover {
+      background: #145027;
+      box-shadow: 0 6px 12px rgba(20,80,39,0.5);
+    }
+
+    .link {
+      color: #1b3c2b;
+      cursor: pointer;
+      margin-top: 12px;
+      display: inline-block;
+      font-weight: 600;
+      font-size: 14px;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    .link:hover {
+      color: #145027;
+      text-decoration: underline;
+    }
+
+    .message {
+      margin-top: 18px;
+      font-weight: 700;
+      text-align: center;
+      user-select: none;
+      min-height: 22px;
+      font-size: 15px;
+      transition: color 0.3s ease;
+    }
+    .error {
+      color: #c0392b;
+    }
+    .success {
+      color: #27ae60;
+    }
+
+    /* Modal background */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(27,60,43,0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-bg.active {
+      display: flex;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    /* Modal card */
+    .modal-card {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 30px 40px 40px;
+      width: 90%;
+      max-width: 400px;
+      border: 3px solid #1b3c2b;
+      box-shadow: 0 12px 24px rgba(27,60,43,0.35);
+      position: relative;
+      animation: fadeInUp 0.4s ease forwards;
+    }
+
+    /* Close button */
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 28px;
+      font-weight: 700;
+      color: #1b3c2b;
+      cursor: pointer;
+      user-select: none;
+      line-height: 1;
+    }
+    .modal-close:hover {
+      color: #145027;
+    }
+
+    /* Place forgot below sign up */
+    .links-container {
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* Logged in view - removed since dashboard is separate */
+  </style>
+</head>
+<body>
+
+  <div class="card" role="main" aria-label="Login form container">
+    <h2>Login</h2>
+
+    <form id="login-form" novalidate>
+      <div class="input-group">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <input
+          type="email"
+          id="login-email"
+          placeholder="Email"
+          autocomplete="email"
+          required
+          aria-describedby="login-email-desc"
+        />
+      </div>
+      <div class="input-group" style="margin-bottom: 8px;">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-7h-1V7a5 5 0 0 0-10 0v3H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zM8 7a4 4 0 0 1 8 0v3H8V7z"/></svg>
+        <input
+          type="password"
+          id="login-password"
+          placeholder="Password"
+          autocomplete="current-password"
+          required
+          aria-describedby="login-password-desc"
+        />
+        <svg id="toggle-login-password" class="toggle-password" viewBox="0 0 24 24" aria-label="Toggle password visibility" role="button" tabindex="0" >
+          <path d="M12 6a9.77 9.77 0 0 1 8.09 4.5 9.8 9.8 0 0 1-16.18 0A9.77 9.77 0 0 1 12 6m0-2a11.77 11.77 0 0 0-9.44 5.5 11.8 11.8 0 0 0 18.88 0A11.77 11.77 0 0 0 12 4z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      </div>
+
+      <button type="submit" aria-label="Login">Login</button>
+
+      <div class="links-container">
+        <div class="link" id="open-signup" role="button" tabindex="0">Don't have an account? Sign Up</div>
+        <div class="link" id="open-forgot" role="button" tabindex="0">Forgot Password?</div>
+      </div>
+    </form>
+
+    <div class="message" id="message" role="alert" aria-live="polite"></div>
+  </div>
+
+  <!-- Sign Up Modal -->
+  <div class="modal-bg" id="signup-modal" role="dialog" aria-modal="true" aria-labelledby="signup-title" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-close" id="close-signup" aria-label="Close sign up modal">&times;</div>
+      <h2 id="signup-title" style="color:#1b3c2b; text-align:center;">Sign Up</h2>
+      <form id="signup-form" novalidate>
+        <div class="input-group">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <input
+            type="email"
+            id="signup-email"
+            placeholder="Email"
+            autocomplete="email"
+            required
+            aria-describedby="signup-email-desc"
+          />
+        </div>
+        <div class="input-group" style="margin-bottom: 8px;">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-7h-1V7a5 5 0 0 0-10 0v3H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zM8 7a4 4 0 0 1 8 0v3H8V7z"/></svg>
+          <input
+            type="password"
+            id="signup-password"
+            placeholder="Password"
+            autocomplete="new-password"
+            required
+            aria-describedby="signup-password-desc"
+          />
+          <svg id="toggle-signup-password" class="toggle-password" viewBox="0 0 24 24" aria-label="Toggle password visibility" role="button" tabindex="0" >
+            <path d="M12 6a9.77 9.77 0 0 1 8.09 4.5 9.8 9.8 0 0 1-16.18 0A9.77 9.77 0 0 1 12 6m0-2a11.77 11.77 0 0 0-9.44 5.5 11.8 11.8 0 0 0 18.88 0A11.77 11.77 0 0 0 12 4z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div>
+
+        <button type="submit" aria-label="Sign Up">Sign Up</button>
+        <div class="message" id="signup-message" role="alert" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal-bg" id="forgot-modal" role="dialog" aria-modal="true" aria-labelledby="forgot-title" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-close" id="close-forgot" aria-label="Close forgot password modal">&times;</div>
+      <h2 id="forgot-title" style="color:#1b3c2b; text-align:center;">Forgot Password</h2>
+      <form id="forgot-form" novalidate>
+        <div class="input-group">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <input
+            type="email"
+            id="forgot-email"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required
+            aria-describedby="forgot-email-desc"
+          />
+        </div>
+        <button type="submit" aria-label="Reset Password">Reset Password</button>
+        <div class="message" id="forgot-message" role="alert" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+
+<script>
+  // Show/hide password toggle logic
+  function setupTogglePassword(inputId, toggleId) {
+    const input = document.getElementById(inputId);
+    const toggle = document.getElementById(toggleId);
+
+    function togglePassword() {
+      if (input.type === 'password') {
+        input.type = 'text';
+        toggle.style.opacity = '1';
+      } else {
+        input.type = 'password';
+        toggle.style.opacity = '0.7';
+      }
+    }
+
+    toggle.addEventListener('click', togglePassword);
+    toggle.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        togglePassword();
+      }
+    });
+  }
+
+  setupTogglePassword('login-password', 'toggle-login-password');
+  setupTogglePassword('signup-password', 'toggle-signup-password');
+
+  // Modal open/close
+  const signupModal = document.getElementById('signup-modal');
+  const forgotModal = document.getElementById('forgot-modal');
+
+  document.getElementById('open-signup').addEventListener('click', () => {
+    signupModal.classList.add('active');
+    signupModal.setAttribute('aria-hidden', 'false');
+  });
+  document.getElementById('open-forgot').addEventListener('click', () => {
+    forgotModal.classList.add('active');
+    forgotModal.setAttribute('aria-hidden', 'false');
+  });
+
+  document.getElementById('close-signup').addEventListener('click', () => {
+    signupModal.classList.remove('active');
+    signupModal.setAttribute('aria-hidden', 'true');
+    document.getElementById('signup-message').textContent = '';
+    document.getElementById('signup-form').reset();
+  });
+
+  document.getElementById('close-forgot').addEventListener('click', () => {
+    forgotModal.classList.remove('active');
+    forgotModal.setAttribute('aria-hidden', 'true');
+    document.getElementById('forgot-message').textContent = '';
+    document.getElementById('forgot-form').reset();
+  });
+
+  // Close modals on clicking outside the modal card
+  [signupModal, forgotModal].forEach(modal => {
+    modal.addEventListener('click', e => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    });
+  });
+
+  // Form submit demos (no backend) - replace with your backend calls
+
+  // Login
+  document.getElementById('login-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+
+    const messageEl = document.getElementById('message');
+    messageEl.textContent = '';
+    messageEl.className = 'message';
+
+    if (!email) {
+      messageEl.textContent = 'Please enter your email.';
+      messageEl.classList.add('error');
+      return;
+    }
+    if (!password) {
+      messageEl.textContent = 'Please enter your password.';
+      messageEl.classList.add('error');
+      return;
+    }
+
+    // Simulate successful login
+    messageEl.textContent = 'Login successful! Redirecting to dashboard...';
+    messageEl.classList.add('success');
+
+    setTimeout(() => {
+      window.location.href = 'dashboard.html';
+    }, 1500);
+  });
+
+  // Sign Up
+  document.getElementById('signup-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value;
+
+    const messageEl = document.getElementById('signup-message');
+    messageEl.textContent = '';
+    messageEl.className = 'message';
+
+    if (!email) {
+      messageEl.textContent = 'Please enter your email.';
+      messageEl.classList.add('error');
+      return;
+    }
+    if (!password || password.length < 6) {
+      messageEl.textContent = 'Password must be at least 6 characters.';
+      messageEl.classList.add('error');
+      return;
+    }
+
+    // Simulate sign up success
+    messageEl.textContent = 'Account created successfully! You can now login.';
+    messageEl.classList.add('success');
+
+    setTimeout(() => {
+      signupModal.classList.remove('active');
+      signupModal.setAttribute('aria-hidden', 'true');
+      messageEl.textContent = '';
+      document.getElementById('signup-form').reset();
+    }, 2000);
+  });
+
+  // Forgot Password
+  document.getElementById('forgot-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('forgot-email').value.trim();
+
+    const messageEl = document.getElementById('forgot-message');
+    messageEl.textContent = '';
+    messageEl.className = 'message';
+
+    if (!email) {
+      messageEl.textContent = 'Please enter your email.';
+      messageEl.classList.add('error');
+      return;
+    }
+
+    // Simulate password reset
+    messageEl.textContent = 'If this email exists, you will receive reset instructions.';
+    messageEl.classList.add('success');
+
+    setTimeout(() => {
+      forgotModal.classList.remove('active');
+      forgotModal.setAttribute('aria-hidden', 'true');
+      messageEl.textContent = '';
+      document.getElementById('forgot-form').reset();
+    }, 2500);
+  });
+</script>
+
+</body>
+</html>

@@ -15,7 +15,7 @@ body {
 header {
   background: linear-gradient(90deg, #1b3c2b, #1b5b43);
   color: #fff;
-  padding: 1rem 2rem;
+  padding: 0.2rem 0.5rem;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -89,7 +89,7 @@ header {
   min-height: 70vh;
   color: #1b3c2b;
   text-align: center;
-  padding: 6rem 1rem 3rem;
+  padding: 4rem 0.5rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -135,20 +135,19 @@
           </div>
       </footer>
 
-    <script>
+  <script>
       // Simple nav link active toggling
       const links = document.querySelectorAll('.sidebar nav ul li a');
       links.forEach(link => {
-        link.addEventListener('click', e => {
-          e.preventDefault();
-          links.forEach(l => l.classList.remove('active'));
-          link.classList.add('active');
-          // Optional: update content area dynamically here
-        });
+      link.addEventListener('click', e => {
+      links.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+      // No e.preventDefault() so link works as normal
+      });
       });
     </script>
 
-<script>
+  <script>
     const announcements = [
   "Great job for completing 2025 Daura on the Book of Usulul Sunnah! Keep up the good work.",
   "We noticed that many of our students are having questions Hadith. Please Let us know if you have any questions.",
